@@ -1,0 +1,9 @@
+#!/bin/sh
+
+/home/dotcloud/env/bin/sentry --config=/home/dotcloud/current/sentry_conf.py syncdb --noinput
+python mkadmin.py
+
+/home/dotcloud/env/bin/sentry --config=/home/dotcloud/current/sentry_conf.py upgrade --noinput
+
+mkdir -p /home/dotcloud/volatile/static
+/home/dotcloud/env/bin/sentry --config=/home/dotcloud/current/sentry_conf.py collectstatic -v0 --noinput
